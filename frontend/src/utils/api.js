@@ -1,7 +1,16 @@
 import axios from 'axios';
 
+// Get base URL from environment or use localhost
+const apiBaseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+// Ensure the base URL includes /api if not already present
+const baseURL = apiBaseURL.endsWith('/api') ? apiBaseURL : `${apiBaseURL}/api`;
+
+// Log the API URL for debugging (remove in production)
+console.log('🔗 API Base URL:', baseURL);
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: baseURL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -25,6 +34,14 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Log errors for debugging
+    console.error('API Error:', {
+      url: error.config?.url,
+      method: error.config?.method,
+      status: error.response?.status,
+      message: error.response?.data?.message || error.message
+    });
+    
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
