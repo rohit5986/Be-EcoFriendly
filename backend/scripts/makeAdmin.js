@@ -4,10 +4,11 @@
 // Usage: node makeAdmin.js <user-email>
 
 const mongoose = require('mongoose');
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 // Import User model
-const User = require('./models/User');
+const User = require('../models/User');
 
 // Get email from command line arguments
 const email = process.argv[2];
