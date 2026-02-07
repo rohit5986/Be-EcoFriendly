@@ -11,6 +11,7 @@ const cartRoutes = require('./routes/cartRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const wishlistRoutes = require('./routes/wishlistRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const setupRoutes = require('./routes/setupRoutes');
 
 // Initialize app
 const app = express();
@@ -50,6 +51,7 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/setup', setupRoutes); // One-time setup endpoint
 
 // Health check
 app.get('/api/health', (req, res) => {

@@ -61,7 +61,7 @@ git push -u origin main
    - **Publish directory**: `frontend/dist`
 5. Add Environment Variable:
    ```
-   VITE_API_URL=https://be-ecofriendly-backend.onrender.com
+   VITE_API_URL=https://be-ecofriendly.onrender.com/
    ```
 6. Click **"Deploy site"**
 7. Your app will be live at: `https://random-name.netlify.app`
@@ -72,28 +72,50 @@ git push -u origin main
 2. Environment → Update `FRONTEND_URL` to your actual Netlify URL
 3. Save changes (will auto-redeploy)
 
-### Step 6: Setup Admin & Products
+### Step 6: Setup Admin & Products (FREE - No Shell Needed!)
 
-You can run these via Render Shell:
+**Use the HTTP Setup Endpoint:**
 
-1. In Render Dashboard → Your service → **Shell** tab
-2. Run:
-   ```bash
-   cd scripts
-   node createTestUser.js
-   node makeAdmin.js test@example.com
-   node seedProducts.js
+1. Open your browser or Postman
+2. Make a **POST** request to:
+   ```
+   https://your-backend-url.onrender.com/api/setup/initialize
+   ```
+3. Body (JSON):
+   ```json
+   {
+     "setupKey": "setup-2024-eco-friendly"
+   }
    ```
 
-**Or** manually via MongoDB Atlas:
-1. Go to Collections → users
-2. Find your user, edit, set `role: "admin"`
+**Or use cURL:**
+```bash
+curl -X POST https://your-backend-url.onrender.com/api/setup/initialize \
+  -H "Content-Type: application/json" \
+  -d '{"setupKey": "setup-2024-eco-friendly"}'
+```
+
+**Or use PowerShell:**
+```powershell
+$body = @{ setupKey = "setup-2024-eco-friendly" } | ConvertTo-Json
+Invoke-RestMethod -Uri "https://your-backend-url.onrender.com/api/setup/initialize" -Method Post -Body $body -ContentType "application/json"
+```
+
+This will create:
+- ✅ Admin user: `admin@be-ecofriendly.com` / `Admin@123456`
+- ✅ 8 sample products
+
+**Full instructions**: See [FREE_SETUP.md](./FREE_SETUP.md)
 
 ---
 
 ## ✅ Done! Your app is live
 
 Visit your Netlify URL and start using your eco-friendly shop! 🌱
+
+Login as admin with:
+- Email: `admin@be-ecofriendly.com`
+- Password: `Admin@123456` (change after first login)
 
 ---
 
