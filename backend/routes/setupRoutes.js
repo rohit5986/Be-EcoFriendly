@@ -83,7 +83,7 @@ router.post('/initialize', async (req, res) => {
         description: 'Portable solar charger for phones and tablets. Harness the power of the sun!',
         price: 49.99,
         originalPrice: 79.99,
-        category: 'Renewable Energy',
+        category: 'Green Tech',
         images: [{
           url: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500',
           publicId: 'sample3'
@@ -103,7 +103,7 @@ router.post('/initialize', async (req, res) => {
         description: 'Protect your phone and the planet. Fully biodegradable phone case made from plant-based materials.',
         price: 24.99,
         originalPrice: 34.99,
-        category: 'Eco Accessories',
+        category: 'Green Tech',
         images: [{
           url: 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=500',
           publicId: 'sample4'
@@ -183,7 +183,7 @@ router.post('/initialize', async (req, res) => {
         description: 'Pack of 6 biodegradable kitchen sponges. Made from cellulose and coconut fiber.',
         price: 9.99,
         originalPrice: 14.99,
-        category: 'Eco Home',
+        category: 'Eco-Friendly Home',
         images: [{
           url: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=500',
           publicId: 'sample8'
