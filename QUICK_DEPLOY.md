@@ -24,7 +24,7 @@ git push -u origin main
 4. Network Access → Add IP: `0.0.0.0/0` (allows all - for production, restrict this)
 5. Copy connection string:
    ```
-   mongodb+srv://becouser:<password>@cluster0.xxxxx.mongodb.net/be-ecofriendly
+   mongodb+srv://Admin-BeEco:Wastec-Group@cluster0.mysgkbs.mongodb.net/?appName=Cluster0
    ```
 
 ### Step 3: Deploy Backend to Render (5 minutes)
@@ -37,17 +37,16 @@ git push -u origin main
    - **Root Directory**: `backend`
    - **Build Command**: `npm install`
    - **Start Command**: `npm start`
-5. Add Environment Variables:
+5. Add Environment Variables (⚠️ **IMPORTANT - Only set these 4 required ones**):
    ```
-   MONGODB_URI=<your-mongodb-connection-string>
+   MONGODB_URI=mongodb+srv://Admin-BeEco:Wastec-Group@cluster0.mysgkbs.mongodb.net/?appName=Cluster0
    JWT_SECRET=<generate-random-32-char-string>
-   JWT_EXPIRE=7d
    FRONTEND_URL=https://YOUR-APP.netlify.app
-   SUPABASE_URL=<your-supabase-url>
-   SUPABASE_ANON_KEY=<your-supabase-anon-key>
-   SUPABASE_SERVICE_ROLE_KEY=<your-service-key>
    NODE_ENV=production
    ```
+   
+   **Note**: Leave SUPABASE variables empty/unset for now. You can add them later if you want image uploads.
+   
 6. Click **"Create Web Service"**
 7. Wait 2-3 minutes, copy your backend URL: `https://be-ecofriendly-backend.onrender.com`
 

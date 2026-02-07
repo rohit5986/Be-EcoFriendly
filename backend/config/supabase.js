@@ -8,12 +8,33 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 let supabase = null;
 let supabaseAdmin = null;
 
-if (supabaseUrl && supabaseUrl !== 'https://placeholder.supabase.co' && supabaseAnonKey && supabaseAnonKey !== 'placeholder-anon-key') {
-  supabase = createClient(supabaseUrl, supabaseAnonKey);
-  
-  if (supabaseServiceKey && supabaseServiceKey !== 'placeholder-service-role-key') {
-    supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
+// Validate Supabase URL format
+const isValidSupabaseUrl = (url) => {
+  if (!url) return false;
+  if (url.includes('your-project') || url.includes('placeholder')) return false;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'https:' && url.includes('supabase.co');
+  } catch {
+    return false;
   }
+};
+
+// Initialize Supabase only if valid credentials are provided
+if (isValidSupabaseUrl(supabaseUrl) && supabaseAnonKey && !supabaseAnonKey.includes('your-') && !supabaseAnonKey.includes('placeholder')) {
+  try {
+    supabase = createClient(supabaseUrl, supabaseAnonKey);
+    console.log('✅ Supabase client initialized');
+    
+    if (supabaseServiceKey && !supabaseServiceKey.includes('your-') && !supabaseServiceKey.includes('placeholder')) {
+      supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
+      console.log('✅ Supabase admin client initialized');
+    }
+  } catch (error) {
+    console.warn('⚠️  Supabase initialization failed:', error.message);
+  }
+} else {
+  console.log('ℹ️  Supabase not configured - image uploads will be disabled');
 }
 
 module.exports = { supabase, supabaseAdmin };
